@@ -4,6 +4,7 @@ from scipy.spatial import distance
 from nltk.translate.bleu_score import SmoothingFunction
 import numpy as np
 import torch
+import csv
 
 smoothie = SmoothingFunction().method1
 device = torch.device("cpu")
@@ -48,6 +49,17 @@ def evaluate_bleu_score(test_trajs, learner_trajs, test_od_dict):
             # print(learner)
             bleu_score = sentence_bleu(test_od_trajs, learner, smoothing_function=smoothie)
             bleu_score_list.append(bleu_score)
+
+    # Save test and learner trajectories side by side in a CSV file
+    with open('trajectories.csv', 'w', newline='') as csvfile:
+        csv_writer = csv.writer(csvfile)
+        csv_writer.writerow(['Test Trajectory', 'Learner Trajectory'])
+        
+        for test_traj, learner_traj in zip(test_trajs, learner_trajs):
+            test_traj_str = '_'.join(test_traj)
+            learner_traj_str = '_'.join(learner_traj)
+            csv_writer.writerow([test_traj_str, learner_traj_str])
+
     return np.mean(bleu_score_list)
 
 
@@ -101,10 +113,63 @@ def evaluate_metrics(test_traj, learner_traj):
     return edit_dist, bleu_score, js_dist
 
 
-def evaluate_model(target_od, target_traj, model, env, n_link=714):
+# def evaluate_model(target_od, target_traj, model, env, n_link=437):
+#     state_ts = torch.from_numpy(np.arange(n_link)).long().to(device)
+#     target_o, target_d = target_od[:, 0].tolist(), target_od[:, 1].tolist()
+#     learner_traj = []
+#     """compute transition matrix for the first OD pair"""
+#     curr_ori, curr_des = target_o[0], target_d[0]
+#     des_ts = (torch.ones_like(state_ts) * curr_des).to(device)
+#     action_prob = model.get_action_prob(state_ts, des_ts).detach().cpu().numpy()  # 714, 8
+#     state_action = env.state_action[:-1]
+#     action_prob[state_action == env.pad_idx] = 0.0
+#     transit_prob = np.zeros((n_link, n_link))
+#     from_st, ac = np.where(state_action != env.pad_idx)
+#     to_st = state_action[state_action != env.pad_idx]
+#     transit_prob[from_st, to_st] = action_prob[from_st, ac]
+#     """compute sample path for the first OD pair"""
+#     sample_path = [str(curr_ori)]
+#     curr_state = curr_ori
+#     for _ in range(50):
+#         if curr_state == curr_des: break
+#         next_state = np.argmax(transit_prob[curr_state])
+#         sample_path.append(str(next_state))
+#         curr_state = next_state
+#     learner_traj.append(sample_path)
+    
+#     for ori, des in zip(target_o[1:], target_d[1:]):
+#         if des == curr_des:
+#             if ori == curr_ori:
+#                 learner_traj.append(sample_path)
+#                 continue
+#             else:
+#                 curr_ori = ori
+#         else:
+#             curr_ori, curr_des = ori, des
+#             des_ts = (torch.ones_like(state_ts) * curr_des).to(device)
+#             action_prob = model.get_action_prob(state_ts, des_ts).detach().cpu().numpy()  # 714, 8
+#             state_action = env.state_action[:-1]
+#             action_prob[state_action == env.pad_idx] = 0.0
+#             transit_prob = np.zeros((n_link, n_link))
+#             from_st, ac = np.where(state_action != env.pad_idx)
+#             to_st = state_action[state_action != env.pad_idx]
+#             transit_prob[from_st, to_st] = action_prob[from_st, ac]
+#         sample_path = [str(curr_ori)]
+#         curr_state = curr_ori
+#         for _ in range(50):
+#             if curr_state == curr_des: break
+#             next_state = np.argmax(transit_prob[curr_state])
+#             sample_path.append(str(next_state))
+#             curr_state = next_state
+#         learner_traj.append(sample_path)
+#     evaluate_metrics(target_traj, learner_traj)
+
+
+def evaluate_model(target_od, target_traj, model, env, n_link=437):
     state_ts = torch.from_numpy(np.arange(n_link)).long().to(device)
     target_o, target_d = target_od[:, 0].tolist(), target_od[:, 1].tolist()
     learner_traj = []
+
     """compute transition matrix for the first OD pair"""
     curr_ori, curr_des = target_o[0], target_d[0]
     des_ts = (torch.ones_like(state_ts) * curr_des).to(device)
@@ -115,22 +180,25 @@ def evaluate_model(target_od, target_traj, model, env, n_link=714):
     from_st, ac = np.where(state_action != env.pad_idx)
     to_st = state_action[state_action != env.pad_idx]
     transit_prob[from_st, to_st] = action_prob[from_st, ac]
+
     """compute sample path for the first OD pair"""
     sample_path = [str(curr_ori)]
     curr_state = curr_ori
     for _ in range(50):
-        if curr_state == curr_des: break
+        if curr_state == curr_des:
+            break
         next_state = np.argmax(transit_prob[curr_state])
         sample_path.append(str(next_state))
         curr_state = next_state
     learner_traj.append(sample_path)
+
+    # Initialize trajectory data list to store the results
+    trajectory_data = []
+
     for ori, des in zip(target_o[1:], target_d[1:]):
-        if des == curr_des:
-            if ori == curr_ori:
-                learner_traj.append(sample_path)
-                continue
-            else:
-                curr_ori = ori
+        if des == curr_des and ori == curr_ori:
+            learner_traj.append(sample_path)
+            learner_path = sample_path
         else:
             curr_ori, curr_des = ori, des
             des_ts = (torch.ones_like(state_ts) * curr_des).to(device)
@@ -141,12 +209,31 @@ def evaluate_model(target_od, target_traj, model, env, n_link=714):
             from_st, ac = np.where(state_action != env.pad_idx)
             to_st = state_action[state_action != env.pad_idx]
             transit_prob[from_st, to_st] = action_prob[from_st, ac]
-        sample_path = [str(curr_ori)]
-        curr_state = curr_ori
-        for _ in range(50):
-            if curr_state == curr_des: break
-            next_state = np.argmax(transit_prob[curr_state])
-            sample_path.append(str(next_state))
-            curr_state = next_state
-        learner_traj.append(sample_path)
+
+            sample_path = [str(curr_ori)]
+            curr_state = curr_ori
+            for _ in range(50):
+                if curr_state == curr_des:
+                    break
+                next_state = np.argmax(transit_prob[curr_state])
+                sample_path.append(str(next_state))
+                curr_state = next_state
+            learner_traj.append(sample_path)
+            learner_path = sample_path
+
+        # Save data for this OD pair (including the first one)
+        target_path = target_traj[len(learner_traj) - 1]
+        target_path_str = '_'.join(map(str, target_path))
+        learner_path_str = '_'.join(map(str, learner_path))
+        trajectory_data.append([target_path_str, learner_path_str])
+
+    # Save trajectory data to CSV
+    with open('trajectory_with_timestep.csv', 'w', newline='') as csvfile:
+        csv_writer = csv.writer(csvfile)
+        csv_writer.writerow(['Test Trajectory', 'Learner Trajectory'])
+        csv_writer.writerows(trajectory_data)
+    
+    # Evaluate the generated trajectories
     evaluate_metrics(target_traj, learner_traj)
+
+    return learner_traj  # Return the generated trajectories

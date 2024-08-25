@@ -14,19 +14,18 @@ import pandas as pd
 def load_model(model_path, device, env, path_feature_pad, edge_feature_pad):
     # Assuming the dimensions for the models based on training setup
     gamma = 0.99  # discount factor
-    edge_data = pd.read_csv('../data/updated_edges.txt')
-    speed_data = {(row['n_id'], row['time_step']): row['speed'] for _, row in edge_data.iterrows()}
+    edge_data = pd.read_csv('../data/base/edge.txt')
     policy_net = PolicyCNN(env.n_actions, env.policy_mask, env.state_action,
                            path_feature_pad, edge_feature_pad,
                            path_feature_pad.shape[-1] + edge_feature_pad.shape[-1] + 1,
-                           env.pad_idx,speed_data).to(device)
+                           env.pad_idx).to(device)
     value_net = ValueCNN(path_feature_pad, edge_feature_pad,
-                         path_feature_pad.shape[-1] + edge_feature_pad.shape[-1],speed_data=speed_data).to(device)
+                         path_feature_pad.shape[-1] + edge_feature_pad.shape[-1]).to(device)
     discrim_net = DiscriminatorAIRLCNN(env.n_actions, gamma, env.policy_mask,
                                        env.state_action, path_feature_pad, edge_feature_pad,
                                        path_feature_pad.shape[-1] + edge_feature_pad.shape[-1] + 1,
                                        path_feature_pad.shape[-1] + edge_feature_pad.shape[-1],
-                                       env.pad_idx,speed_data).to(device)
+                                       env.pad_idx).to(device)
 
     model_dict = torch.load(model_path, map_location=device)
     policy_net.load_state_dict(model_dict['Policy'])
@@ -36,14 +35,15 @@ def load_model(model_path, device, env, path_feature_pad, edge_feature_pad):
     return policy_net, value_net, discrim_net
 
 def evaluate_only():
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    device = torch.device('cpu')
     
     # Path settings
-    model_path = "../trained_models/airl_CV0_size10000.pt"  # Adjust as necessary
-    edge_p = "../data/edge.txt"
-    network_p = "../data/transit.npy"
-    path_feature_p = "../data/feature_od.npy"
-    test_p = "../data/cross_validation/test_CV0.csv"  # Adjust path and CV index as necessary
+    model_path = "../trained_models/base/airl_CV0_size10000.pt"  # Adjust as necessary
+    edge_p = "../data/base/edge.txt"
+    network_p = "../data/base/transit.npy"
+    path_feature_p = "../data/base/feature_od.npy"
+    test_p = "../data/base/cross_validation/test_CV0.csv"
+    
 
     # Initialize environment
     od_list, od_dist = ini_od_dist(test_p)
