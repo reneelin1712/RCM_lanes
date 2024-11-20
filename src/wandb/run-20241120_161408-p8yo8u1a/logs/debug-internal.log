@@ -1,0 +1,21 @@
+{"time":"2024-11-20T16:14:08.445851+10:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-20T16:14:08.445924+10:00","level":"INFO","msg":"created symlink","path":"/Users/mochi/Documents/Projects/RCM_lane/src/wandb/run-20241120_161408-p8yo8u1a/logs/debug-core.log"}
+{"time":"2024-11-20T16:14:08.967718+10:00","level":"INFO","msg":"created new stream","id":"p8yo8u1a"}
+{"time":"2024-11-20T16:14:08.968139+10:00","level":"INFO","msg":"stream: started","id":"p8yo8u1a"}
+{"time":"2024-11-20T16:14:08.968187+10:00","level":"INFO","msg":"writer: Do: started","stream_id":"p8yo8u1a"}
+{"time":"2024-11-20T16:14:08.968507+10:00","level":"INFO","msg":"sender: started","stream_id":"p8yo8u1a"}
+{"time":"2024-11-20T16:14:08.968663+10:00","level":"INFO","msg":"handler: started","stream_id":"p8yo8u1a"}
+{"time":"2024-11-20T16:14:09.626708+10:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-20T16:19:58.489141+10:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/reneelin2024/RCM-AIRL-lane/p8yo8u1a/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-20T16:20:00.804809+10:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/reneelin2024/RCM-AIRL-lane/p8yo8u1a/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-20T16:20:05.833023+10:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/reneelin2024/RCM-AIRL-lane/p8yo8u1a/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-20T16:22:17.338484+10:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/reneelin2024/RCM-AIRL-lane/p8yo8u1a/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-20T16:22:17.590636+10:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": read tcp 172.19.128.204:59310->35.186.228.49:443: read: can't assign requested address"}
+{"time":"2024-11-20T16:22:19.885156+10:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-20T16:24:11.870842+10:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-20T16:24:20.245477+10:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-20T16:24:24.834076+10:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/reneelin2024/RCM-AIRL-lane/p8yo8u1a/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-20T16:25:35.399411+10:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-20T16:27:46.115357+10:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/reneelin2024/RCM-AIRL-lane/p8yo8u1a/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-20T16:59:22.370038+10:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2024-11-20T18:58:45.174087+10:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": read tcp 172.19.128.204:61909->35.186.228.49:443: read: connection reset by peer"}

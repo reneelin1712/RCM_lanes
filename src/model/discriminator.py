@@ -92,6 +92,63 @@ class DiscriminatorAIRLCNN(nn.Module):
         with torch.no_grad():
             logits = self.forward(states, des, act, log_pis, next_states)
             return -F.logsigmoid(-logits)
+        
+        
+    def get_input_features(self, state, des, action, next_state):
+        state_neighbor = self.action_state_pad[state]
+        neigh_path_feature = self.path_feature[state_neighbor, des.unsqueeze(1).repeat(1, self.action_num + 1), :]
+        neigh_edge_feature = self.link_feature[state_neighbor, :]
+
+        current_path_feature = neigh_path_feature[:, action, :][0,-1,:]
+        current_edge_feature = neigh_edge_feature[:, action, :][0,-1,:]
+
+        next_path_feature = self.path_feature[next_state, des, :]
+        next_edge_feature = self.link_feature[next_state, :]
+
+        self.cur_state = state
+        return neigh_path_feature, neigh_edge_feature, current_path_feature, current_edge_feature, next_path_feature, next_edge_feature
+    
+    def forward_with_actual_features(self, neigh_path_feature, neigh_edge_feature, path_feature, edge_feature, action, log_prob, next_path_feature, next_edge_feature):
+        # Calculate the neigh_mask_feature
+        neigh_mask_feature = self.policy_mask_pad[self.cur_state].unsqueeze(-1)  # [batch_size, 9, 1]
+
+        # Ensure all features have the correct shape
+        path_feature = path_feature.unsqueeze(0) if path_feature.dim() == 1 else path_feature  # [1, feature_size]
+        edge_feature = edge_feature.unsqueeze(0) if edge_feature.dim() == 1 else edge_feature  # [1, feature_size]
+
+        # Process the neighborhood features
+        neigh_feature = torch.cat([neigh_path_feature, neigh_edge_feature, neigh_mask_feature], -1)
+        neigh_feature = neigh_feature[:, self.new_index, :]
+        x = neigh_feature.view(neigh_path_feature.size(0), 3, 3, -1)
+        x = x.permute(0, 3, 1, 2)
+
+        # Pass through the convolutional layers
+        x = self.pool(F.leaky_relu(self.conv1(x), 0.2))
+        x = F.leaky_relu(self.conv2(x), 0.2)
+        x = x.view(-1, 30)
+
+        # Concatenate with the action feature
+        x_act = F.one_hot(action, num_classes=self.action_num)
+        x = torch.cat([x, x_act], 1)
+
+        # Pass through the fully connected layers
+        x = F.leaky_relu(self.fc1(x), 0.2)
+        x = F.leaky_relu(self.fc2(x), 0.2)
+        rs = self.fc3(x)
+
+        # Process the current state features
+        x_state = torch.cat([path_feature, edge_feature], -1)
+        x_state = F.leaky_relu(self.h_fc1(x_state), 0.2)
+        x_state = F.leaky_relu(self.h_fc2(x_state), 0.2)
+        x_state = self.h_fc3(x_state)
+
+        # Process the next state features
+        next_x_state = torch.cat([next_path_feature, next_edge_feature], -1)
+        next_x_state = F.leaky_relu(self.h_fc1(next_x_state), 0.2)
+        next_x_state = F.leaky_relu(self.h_fc2(next_x_state), 0.2)
+        next_x_state = self.h_fc3(next_x_state)
+
+        return rs + self.gamma * next_x_state - x_state - log_prob
 
 
 class DiscriminatorCNN(nn.Module):

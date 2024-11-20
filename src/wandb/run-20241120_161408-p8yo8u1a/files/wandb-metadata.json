@@ -1,0 +1,39 @@
+{
+  "os":  "macOS-14.5-arm64-arm-64bit",
+  "python":  "3.10.14",
+  "startedAt":  "2024-11-20T06:14:08.443464Z",
+  "program":  "/Users/mochi/Documents/Projects/RCM_lane/src/train_airl_sweep.py",
+  "codePath":  "src/train_airl_sweep.py",
+  "git":  {
+    "remote":  "https://github.com/reneelin1712/RCM_lanes.git",
+    "commit":  "53658f8b77ad719779621f14b321dd7710c2476a"
+  },
+  "email":  "reneelin2019@gmail.com",
+  "root":  "/Users/mochi/Documents/Projects/RCM_lane/src",
+  "host":  "MochiKYs-MacBook-Air.local",
+  "username":  "mochi",
+  "executable":  "/opt/anaconda3/envs/RCM/bin/python",
+  "codePathLocal":  "train_airl_sweep.py",
+  "cpu_count":  8,
+  "cpu_count_logical":  8,
+  "disk":  {
+    "/":  {
+      "total":  "494384795648",
+      "used":  "435024248832"
+    }
+  },
+  "memory":  {
+    "total":  "17179869184"
+  },
+  "cpu":  {
+    "count":  8,
+    "countLogical":  8
+  },
+  "apple":  {
+    "name":  "Apple M3",
+    "ecpuCores":  4,
+    "pcpuCores":  4,
+    "gpuCores":  10,
+    "memoryGb":  16
+  }
+}

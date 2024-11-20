@@ -1,0 +1,73 @@
+1.0
+n_states 438
+n_actions 8
+n_sapair 685
+policy mask (438, 8)
+path_feature (437, 437, 12)
+edge_feature (437, 8)
+Done loading expert data... number of episodes: 183825
+Agent constructed...
+Model saved to ../trained_models/base/airl_lr0_00034193156245417516_bs32_gamma0_95_tau0_95_clip0_1_epoch30_runp8yo8u1a.pt
+Iteration 10 - Edit Distance: 0.9986, 3-gram Transition Entropy: 0.1340065545458615, Score: 0.9315967227270693
+Iteration 20 - Edit Distance: 0.9918079877112135, 3-gram Transition Entropy: 0.10112116441345181, Score: 0.9412474055044876
+[34m[1mwandb[0m: Network error (ConnectionError), entering retry loop.
+[34m[1mwandb[0m: Network error (ConnectionError), entering retry loop.
+Iteration 30 - Edit Distance: 0.9969695716996475, 3-gram Transition Entropy: 0.07789300024165381, Score: 0.9580230715788206
+Model saved to ../trained_models/base/airl_lr0_00034193156245417516_bs32_gamma0_95_tau0_95_clip0_1_epoch30_runp8yo8u1a.pt
+Iteration 40 - Edit Distance: 0.8257607276008753, 3-gram Transition Entropy: 0.09405792746902085, Score: 0.7787317638663649
+Model saved to ../trained_models/base/airl_lr0_00034193156245417516_bs32_gamma0_95_tau0_95_clip0_1_epoch30_runp8yo8u1a.pt
+Iteration 50 - Edit Distance: 0.7455190296058877, 3-gram Transition Entropy: 0.06313871740176752, Score: 0.7139496709050039
+Model saved to ../trained_models/base/airl_lr0_00034193156245417516_bs32_gamma0_95_tau0_95_clip0_1_epoch30_runp8yo8u1a.pt
+Iteration 60 - Edit Distance: 0.5892940553464286, 3-gram Transition Entropy: 0.10827233532362235, Score: 0.5351578876846175
+Model saved to ../trained_models/base/airl_lr0_00034193156245417516_bs32_gamma0_95_tau0_95_clip0_1_epoch30_runp8yo8u1a.pt
+Iteration 70 - Edit Distance: 0.5870852434748713, 3-gram Transition Entropy: 0.11118593306655217, Score: 0.5314922769415953
+Model saved to ../trained_models/base/airl_lr0_00034193156245417516_bs32_gamma0_95_tau0_95_clip0_1_epoch30_runp8yo8u1a.pt
+Iteration 80 - Edit Distance: 0.5781167353036974, 3-gram Transition Entropy: 0.09433637007701735, Score: 0.5309485502651887
+Model saved to ../trained_models/base/airl_lr0_00034193156245417516_bs32_gamma0_95_tau0_95_clip0_1_epoch30_runp8yo8u1a.pt
+Iteration 90 - Edit Distance: 0.3658359841472015, 3-gram Transition Entropy: 0.12768312900050266, Score: 0.3019944196469502
+Model saved to ../trained_models/base/airl_lr0_00034193156245417516_bs32_gamma0_95_tau0_95_clip0_1_epoch30_runp8yo8u1a.pt
+Iteration 100 - Edit Distance: 0.2867783199563836, 3-gram Transition Entropy: 0.12444471565199268, Score: 0.22455596213038725
+Iteration 110 - Edit Distance: 0.2837601942833584, 3-gram Transition Entropy: 0.10413200632081429, Score: 0.23169419112295125
+Model saved to ../trained_models/base/airl_lr0_00034193156245417516_bs32_gamma0_95_tau0_95_clip0_1_epoch30_runp8yo8u1a.pt
+Iteration 120 - Edit Distance: 0.2599487718298201, 3-gram Transition Entropy: 0.116261331025327, Score: 0.20181810631715663
+Model saved to ../trained_models/base/airl_lr0_00034193156245417516_bs32_gamma0_95_tau0_95_clip0_1_epoch30_runp8yo8u1a.pt
+Iteration 130 - Edit Distance: 0.11833199181412314, 3-gram Transition Entropy: 0.09477561531577071, Score: 0.0709441841562378
+Model saved to ../trained_models/base/airl_lr0_00034193156245417516_bs32_gamma0_95_tau0_95_clip0_1_epoch30_runp8yo8u1a.pt
+Iteration 140 - Edit Distance: 0.11861374198305646, 3-gram Transition Entropy: 0.14262573356140568, Score: 0.047300875202353626
+Model saved to ../trained_models/base/airl_lr0_00034193156245417516_bs32_gamma0_95_tau0_95_clip0_1_epoch30_runp8yo8u1a.pt
+Iteration 150 - Edit Distance: 0.10358559666810682, 3-gram Transition Entropy: 0.15210246909424685, Score: 0.027534362120983397
+Iteration 160 - Edit Distance: 0.2076841858418972, 3-gram Transition Entropy: 0.14046780882511667, Score: 0.13745028142933888
+Iteration 170 - Edit Distance: 0.11554943876019687, 3-gram Transition Entropy: 0.12800283795742123, Score: 0.05154801978148625
+Iteration 180 - Edit Distance: 0.127685512783502, 3-gram Transition Entropy: 0.10996627363077491, Score: 0.07270237596811453
+Iteration 190 - Edit Distance: 0.10969367114490595, 3-gram Transition Entropy: 0.10978651619967686, Score: 0.054800413045067525
+Iteration 200 - Edit Distance: 0.1389525241090739, 3-gram Transition Entropy: 0.11656625814484846, Score: 0.08066939503664969
+Iteration 210 - Edit Distance: 0.12967591547206087, 3-gram Transition Entropy: 0.1137965891487279, Score: 0.07277762089769692
+Iteration 220 - Edit Distance: 0.11643497115626184, 3-gram Transition Entropy: 0.10621895197801784, Score: 0.06332549516725292
+Iteration 230 - Edit Distance: 0.15742239979686862, 3-gram Transition Entropy: 0.09267247811185943, Score: 0.11108616074093891
+Iteration 240 - Edit Distance: 0.13968682531418045, 3-gram Transition Entropy: 0.11187974755794818, Score: 0.08374695153520637
+Iteration 250 - Edit Distance: 0.14943092188219567, 3-gram Transition Entropy: 0.10460393246903955, Score: 0.0971289556476759
+Iteration 260 - Edit Distance: 0.11863913718204032, 3-gram Transition Entropy: 0.12971471442995045, Score: 0.053781779967065096
+Iteration 270 - Edit Distance: 0.12054100525450855, 3-gram Transition Entropy: 0.11302346475733, Score: 0.06402927287584355
+Iteration 280 - Edit Distance: 0.11078912567396634, 3-gram Transition Entropy: 0.12064573790197379, Score: 0.05046625672297945
+Iteration 290 - Edit Distance: 0.19923098376651377, 3-gram Transition Entropy: 0.1142095364131249, Score: 0.1421262155599513
+Iteration 300 - Edit Distance: 0.18887285925283373, 3-gram Transition Entropy: 0.12047459657818464, Score: 0.1286355609637414
+Iteration 310 - Edit Distance: 0.24085882652980603, 3-gram Transition Entropy: 0.1302529951653384, Score: 0.17573232894713683
+Iteration 320 - Edit Distance: 0.13412449803783497, 3-gram Transition Entropy: 0.11811662925902248, Score: 0.07506618340832372
+Iteration 330 - Edit Distance: 0.13957542807071835, 3-gram Transition Entropy: 0.13908636910517408, Score: 0.07003224351813131
+Iteration 340 - Edit Distance: 0.17668562256407447, 3-gram Transition Entropy: 0.10980017184412759, Score: 0.12178553664201067
+Iteration 350 - Edit Distance: 0.09404467347121118, 3-gram Transition Entropy: 0.12387117145235305, Score: 0.03210908774503465
+Iteration 360 - Edit Distance: 0.13701915387084873, 3-gram Transition Entropy: 0.13069798796525275, Score: 0.07167015988822235
+Iteration 370 - Edit Distance: 0.25757415476080225, 3-gram Transition Entropy: 0.14139552208728554, Score: 0.18687639371715947
+Iteration 380 - Edit Distance: 0.3188759277399172, 3-gram Transition Entropy: 0.1434642711913808, Score: 0.24714379214422677
+Iteration 390 - Edit Distance: 0.3224986255744967, 3-gram Transition Entropy: 0.1235499822122288, Score: 0.2607236344683823
+Iteration 400 - Edit Distance: 0.42109780233411687, 3-gram Transition Entropy: 0.12456978730533363, Score: 0.35881290868145005
+Iteration 410 - Edit Distance: 0.4028013165697898, 3-gram Transition Entropy: 0.1229357371315803, Score: 0.3413334480039996
+Iteration 420 - Edit Distance: 0.549658975410045, 3-gram Transition Entropy: 0.11488871128166567, Score: 0.4922146197692122
+Iteration 430 - Edit Distance: 0.45778101985670255, 3-gram Transition Entropy: 0.1446620155789541, Score: 0.3854500120672255
+Iteration 440 - Edit Distance: 0.5316024454831038, 3-gram Transition Entropy: 0.13739649777637178, Score: 0.4629041965949179
+Iteration 450 - Edit Distance: 0.4647109809247066, 3-gram Transition Entropy: 0.09782973709941108, Score: 0.415796112375001
+Iteration 460 - Edit Distance: 0.372016868447953, 3-gram Transition Entropy: 0.14930077617050344, Score: 0.2973664803627013
+Iteration 470 - Edit Distance: 0.42897234835916426, 3-gram Transition Entropy: 0.13325546860004056, Score: 0.362344614059144
+Iteration 480 - Edit Distance: 0.3361841760345628, 3-gram Transition Entropy: 0.11864109285034231, Score: 0.27686362960939165
+Iteration 490 - Edit Distance: 0.44498922158842413, 3-gram Transition Entropy: 0.13702121574540924, Score: 0.3764786137157195
+Iteration 500 - Edit Distance: 0.4297964414650407, 3-gram Transition Entropy: 0.1425839547510315, Score: 0.35850446408952497

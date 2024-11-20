@@ -3,4 +3,9 @@ __pycache__/
 .DS_Store
 ._*
 
+/src/output_img_*
+/src/rewards
+/src/eva
 
+/src/attributions
+/src/wandbs
